@@ -17,10 +17,10 @@ import RealFunctions
 import ComplexFunctions
 
 width :: (Num a) => a
-width = 5100
+width = 510
 
 height :: (Num a) => a
-height = 3300
+height = 330
 
 pixelRenderer :: (RealFloat a) => Int -> Int -> a 
 pixelRenderer x y = smooth samples -- avg' (Prelude.map (f) samples)

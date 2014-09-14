@@ -7,9 +7,14 @@ fibonacci :: (Fractional a, Floating a, Num a) => a -> a
 fibonacci z = ((phi ** z) - (cos (pi*z)) * (phi ** (-z))) / (sqrt 5)
     where phi = (1 + (sqrt 5)) / 2
 
-fold :: (RealFloat a) => Complex a -> Complex a
-fold z = mkPolar (magnitude z) (triangle (phase z) (p) (p)) 
-    where p = pi/6
+fold :: (RealFloat a) => a -> Complex a -> Complex a
+fold p z = mkPolar (magnitude z) (triangle (phase z) (p) (p)) 
+
+-- remaps x and y in [-1,1] 
+remap :: (RealFloat a) => Complex a -> a -> a -> Complex a 
+remap z w h = ((realPart z') / a) :+ ((imagPart z') / a)
+    where a = 0.5 * (min w h)
+          z'= z - (w/2 :+ h/2) -- centering
 
 -- STOP CONDITIONS
 isNotInfinite :: (RealFloat a, Fractional a ) => Complex a -> Bool

@@ -28,3 +28,6 @@ schwefel z = 2 * 418.9829 - (f z)
 
 reflection :: (Floating a, Fractional a) => a -> a
 reflection z = 1 / z
+
+map' :: RealFrac a => a -> a -> a -> a -> a -> a
+map' inMin inMax outMin outMax x = (x - inMin) * (outMax - outMin) / (inMax - inMin) + outMin

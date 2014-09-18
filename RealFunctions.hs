@@ -31,3 +31,9 @@ reflection z = 1 / z
 
 map' :: RealFrac a => a -> a -> a -> a -> a -> a
 map' inMin inMax outMin outMax x = (x - inMin) * (outMax - outMin) / (inMax - inMin) + outMin
+
+limit :: (Ord a) => a -> a -> a -> a
+limit min max x 
+    | x < min = min
+    | x > max = max
+    | otherwise = x

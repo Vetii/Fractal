@@ -5,6 +5,13 @@ This package is an attempt to play with Fractals in the Complex plane with haske
 It uses the *Repa* array library for processing and saving of images.
 Get repa here: [Repa](http://hackage.haskell.org/package/repa-2.0.0.4)
 
+Usage
+-----
+* Clone the repository
+* Initiate a sandbox: `cabal sandbox init`
+* Install dependencies: `cabal install --dependencies-only`
+* And build: `cabal build`
+
 Preview
 -------
 This is how the output of the program might look like.

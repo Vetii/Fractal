@@ -4,14 +4,18 @@ import Data.Fixed -- mod'
 
 -- one dimensional functions
 
-sawtooth :: (RealFloat a) => a -> a 
-sawtooth = tan . abs . sin 
+sawtooth :: (RealFloat a) => a -> a
+sawtooth = tan . abs . sin
 
 triangle :: (RealFloat a) => a -> a -> a -> a
 triangle x a p = (a / p) * (p - abs(x `mod'` (2*p) - p))
 
 gamma :: (Floating a) => a -> a
 gamma z = z ** (1/2.2)
+
+smoothstep :: (RealFrac a) => a -> a -> a -> a
+smoothstep min max x = 3 * (x'^2) - 2 * (x'^3) 
+    where x' = map' min max 0.0 1.0 x 
 
 decreasing :: (RealFloat a, Fractional a) => a -> a
 decreasing x = 1/(x+1)
@@ -32,8 +36,8 @@ reflection z = 1 / z
 map' :: RealFrac a => a -> a -> a -> a -> a -> a
 map' inMin inMax outMin outMax x = (x - inMin) * (outMax - outMin) / (inMax - inMin) + outMin
 
-limit :: (Ord a) => a -> a -> a -> a
-limit min max x 
+clamp :: (Ord a) => a -> a -> a -> a
+clamp min max x 
     | x < min = min
     | x > max = max
     | otherwise = x

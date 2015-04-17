@@ -29,7 +29,16 @@ sample :: (RealFloat a, Fractional a) => Int  -- nbSamples
     -> (Complex a -> Complex a) -- how to get next point in serie
     -> Complex a -- starting point of serie (z0)
     -> [Complex a] -- list of samples
-sample nbsamples isValid funct start = (takeWhile isValid).(take nbsamples).
-    iterate funct $ start
+sample nbsamples isValid funct start = ((takeWhile isValid).(take nbsamples).(iterate (funct))) start
 
+sampleIFS :: (RealFloat a, Fractional a) => Int -- nbSamples
+    -> (Complex a -> Bool) -- stop condition
+    -> [(Complex a -> Complex a)] -- list of functions to apply
+    -> Complex a -- starting point
+    -> [Complex a]
+sampleIFS nbSamples isValid functions start = (takeWhile isValid).(take nbSamples).
+    (iterateList functions) $ start
 
+iterateList :: [(a -> a)] -> a -> [a]
+iterateList functions x = x : iterateList fs (f x) 
+    where (f:fs) = cycle functions
